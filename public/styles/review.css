@@ -1,0 +1,59 @@
+        /* Style the list items */
+        #newsArticles {
+            background-color: blue;
+        }
+        #youTubeVideos {
+            background-color: red;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+        ul li {
+            cursor: pointer;
+            position: relative;
+            padding: 12px 8px 12px 5px;
+            list-style-type: none;
+            background: #eee;
+            font-size: 18px;
+            transition: 0.2s;
+            text-align: center;
+        }
+
+        /* Set all odd list items to a different color (zebra-stripes) */
+        ul li:nth-child(odd) {
+        background: #f9f9f9;
+        }
+
+        /* Darker background-color on hover */
+        ul li:hover {
+        background: #ddd;
+        }
+        .content {
+        padding: 0 0px;
+        display: none;
+        overflow: hidden;
+        background-color: #f1f1f1;
+        }
+        .collapsible {
+        background-color: #eee;
+        /* color: var(--light-shades-grey); */
+        color: var(--light-accent-white);
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 25px;
+        height: 100px;
+        text-align: center;
+        }
+
+        button.delete-content {
+            background-color: red;
+            color: white;
+            border-radius: 10px;
+            float: right;
+            margin-right: 50px;
+        }

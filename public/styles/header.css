@@ -1,0 +1,49 @@
+#header {
+    background-color: var(--dark-shades-purple);
+    color: var(--light-accent-white);
+    height: 10vh;
+    font-size: 1.5rem;
+}
+
+nav.nav {
+    width: 50vw;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div.show-dropdown {
+    position: relative;
+}
+
+
+nav.nav a, div.show-dropdown {
+    color: white;
+    font-weight: bold;
+    background-color: var(--dark-shades-purple);
+}
+
+
+
+nav.nav > div.show-dropdown > div.dropdown-content {
+    padding-top: 15px;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    left: 0px;
+}
+
+nav.nav > div.show-dropdown > div.dropdown-content > a {
+    padding: 5px;
+    text-decoration: none;
+}
+
+div.show-dropdown:hover {
+    cursor: pointer;
+}
+
+#logout {
+    background-color: aqua;
+    float: right;
+}

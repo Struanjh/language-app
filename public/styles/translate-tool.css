@@ -1,0 +1,26 @@
+
+
+div.translator-container {
+    display: none;
+}
+
+div.translate-lang-container, div.src-lang-container {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+div.translate-lang-container > textarea, div.src-lang-container > textarea {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+div.translate-content-container {
+    flex-direction: column;
+}
+
+div.translate-content-container .control-bar {
+    align-items: center;
+    justify-content: space-between;
+}
