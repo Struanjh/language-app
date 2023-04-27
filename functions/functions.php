@@ -286,15 +286,14 @@ function createNewsArticle($conn, $article) {
     $p_date = strtotime($article['published_date']);
     $p_date = date('Y-m-d');
     $sql = "INSERT INTO news 
-    (user_id, title, author, article_url, country, language, topic, published_date)
+    (user_id, title, author, country, language, topic, published_date)
     VALUES
-    (:user_id, :title, :author, :article_url, :country, :language, :topic, :published_date);";
+    (:user_id, :title, :author, :country, :language, :topic, :published_date);";
     $stmt = $conn->prepare($sql);
     $stmt->execute([
         'user_id' => $_SESSION['user_id'],
         'title' => trim(htmlspecialchars($article['title'])),
         'author' => trim(htmlspecialchars($article['author'])),
-        'article_url' => trim(htmlspecialchars($article['article_url'])),
         'country' => trim(htmlspecialchars($article['country'])),
         'language' => trim(htmlspecialchars($article['language'])),
         'topic' => trim(htmlspecialchars($article['topic'])),

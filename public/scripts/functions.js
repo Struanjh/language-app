@@ -35,26 +35,29 @@ export const makeRequest = async function (url, options) {
 
 //CLICKED ARTICLE PASSED IN AS NODELIST
 export const renderFocusNewsArticleView = (container, articleContent) => {
-  //Being passed in as HTML Collection, probably need to do something to convert to make it reusable when data is being pulled from DB instead...
-  console.log(typeof(articleContent), articleContent);
-  //Index 6 is read more button - not needed. Assumption that focus article is always a NEW article, so not querying DB here to get existing words..........
   let focusArticleHtml = 
     `
       <div id="saved-words"></div>
       <div id="title-header">
         <input type="hidden" id="content-type" value="news"/>
-        <a id="focus-article-title" href="${articleContent[1].firstElementChild.href}" target="_blank">${articleContent[0].innerText}</a>
-        <p id="focus-article-topic">${articleContent[8].innerText}</p>
-        <p id="focus-article-author">${articleContent[2].innerText}</p>
-        <p id="focus-article-published_date">${articleContent[3].innerText}</p>
-        <p id="focus-article-language">${articleContent[4].innerText}</p>
-        <p id="focus-article-country">${articleContent[5].innerText}</p>
+        <h5 id="focus-article-title">${articleContent[0].innerText}</h5>
+        <p id="focus-article-topic">${articleContent[7].innerText}</p>
+        <p id="focus-article-author">${articleContent[1].innerText}</p>
+        <p id="focus-article-published_date">${articleContent[2].innerText}</p>
+        <p id="focus-article-language">${articleContent[3].innerText}</p>
+        <p id="focus-article-country">${articleContent[4].innerText}</p>
       </div>
       <div id="article-contents">
-        <p>${articleContent[7].innerText}</p>
       </div>
     `;
   container.innerHTML = focusArticleHtml;
+  let articleContentsArr = articleContent[6].innerText.split(" ");
+  let articleContentsFormattedHtml = ``;
+  for(let i = 0; i < articleContentsArr.length; i++) {
+    articleContentsFormattedHtml += `<span class=word><p>${articleContentsArr[i]}</p></span>`;
+  }
+  let articleContents = document.getElementById('article-contents');
+  articleContents.innerHTML = articleContentsFormattedHtml;
 }
 
 export const renderFocusYouTubeVideoView = (container, videoInfo, captionsContent) => {

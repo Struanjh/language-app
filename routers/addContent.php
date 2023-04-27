@@ -21,8 +21,6 @@ if ($contentType !== "application/json")
 
 $content = trim(file_get_contents("php://input"));
 $data = json_decode($content, true);
-print_r($data);
-
 if($data['requestIdentifier'] == 'newWords') {
   $conn = createDbConn(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
   if($conn) {

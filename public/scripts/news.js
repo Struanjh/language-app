@@ -45,6 +45,15 @@
     organizeEvents();
   });
 
+  const addWordToTranslateTool = e => {
+    console.log(e.target.nodeName);
+    if(e.target.nodeName === "P" || e.target.nodeName === "SPAN") {
+        let newWord = e.target.innerText;
+        console.log(newWord);
+        document.getElementById('src-lang-text').value += ` ${newWord}`;
+    }
+  }
+
   //HOLDER FUNCTION FOR PREPARING THEN SENDING REQUEST, THEN DISPLAYING RETURNED RESULTS
   const organizeEvents = async () => {
     let request = functions.prepareRequest(newsApiUrl, params, null, options);
@@ -103,6 +112,7 @@
         focusArticleContainer.appendChild(translatorTool);
         newsForm.style.display = 'none';
         searchResults.style.display = 'none';
+        document.getElementById('article-contents').addEventListener('click', addWordToTranslateTool);
         createBackButton();
       })
     })

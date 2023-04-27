@@ -48,6 +48,20 @@ h4.errMsg {
     word-break: break-word;
   }
 
+  div.article * {
+      padding: 5px;
+      margin: 10px;
+      font-size: 15px;
+  }
+
+  div.article button {
+    background-color: green;
+    width: 75%;
+    height: 10%;
+    margin-bottom: 10%;
+    border-radius: 50px;
+}
+
   div.results-heading {
       width: 50vw;
       margin: 0px auto 60px auto;

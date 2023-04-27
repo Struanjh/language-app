@@ -136,14 +136,7 @@ const sendSavedWordsToDb = async () => {
     if(data.contentType == 'news') {
         let article = {};
         const articleDetails = document.getElementById('title-header');
-        console.log(articleDetails.children);
         for (const child of articleDetails.children) {
-            console.log(child);
-            console.log(child.tagName);
-            //Need to collect both href and title text from Anchor TAG
-            if(child.tagName == 'A') {
-                article['article_url'] = child.getAttribute('href');
-            }
             let attribute, value;
             attribute = child.getAttribute('id');
             attribute = attribute.substring(14);
