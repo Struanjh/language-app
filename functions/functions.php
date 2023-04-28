@@ -260,7 +260,7 @@ function deleteContent ($contentId, $contentType) {
     if($contentType == "news") {
         $sql = "DELETE FROM news WHERE id = :id;";
     } else {
-        $sql = "DELETE FROM youtube_id WHERE id = :id;";
+        $sql = "DELETE FROM youtube_videos WHERE id = :id;";
     }
     $statement = $conn->prepare($sql);
     $statement->execute(['id' => $contentId]);
