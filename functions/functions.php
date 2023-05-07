@@ -15,42 +15,42 @@ function createDbConn($host, $dbname, $username, $password) {
 }
 
 //----------------------------AUTH------------------------------//
-function handleOAuthLogin($client) {
-    //Google Auth Server returns Auth code in URL.. then get an Access token
-    $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-    $client->setAccessToken($token['access_token']);
-    $google_oauth = new Google\Service\Oauth2($client);
-    $google_account_info = $google_oauth->userinfo->get();
-    $userinfo = [
-        'email' => $google_account_info['email'] ?? null,
-        'first_name' => $google_account_info['givenName'] ?? null,
-        'last_name' => $google_account_info['familyName'] ?? null,
-        'token' => $google_account_info['id'] ?? null,
-        'role' => 'user',
-        'oauth' => true,
-        'password' => null,
-        'password_set' => null
-    ];
-    $conn = createDbConn(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
-    if($conn) {
-        $userDetails = userExists($conn, $userinfo['email']);
-        if($userDetails) {
-            $sql = "UPDATE users 
-                    SET last_login = :last_login
-                    WHERE id = :id";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute(['last_login' => date("Y-m-d H:i:s"), 'id' => $userDetails['id']]);
-            $_SESSION['user_id'] = $userDetails['id'];
-        } else {
-            $userinfo['joined_on'] = date("Y-m-d H:i:s");
-            $userinfo['last_login'] = null;
-            $createdUser  = createUser($userinfo);
-            $_SESSION['user_id'] = $createdUser['user_id'];
-        }
-    }
-    header('Location: '.$_SERVER['PHP_SELF']);
-    die();
-}
+// function handleOAuthLogin($client) {
+//     //Google Auth Server returns Auth code in URL.. then get an Access token
+//     $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+//     $client->setAccessToken($token['access_token']);
+//     $google_oauth = new Google\Service\Oauth2($client);
+//     $google_account_info = $google_oauth->userinfo->get();
+//     $userinfo = [
+//         'email' => $google_account_info['email'] ?? null,
+//         'first_name' => $google_account_info['givenName'] ?? null,
+//         'last_name' => $google_account_info['familyName'] ?? null,
+//         'token' => $google_account_info['id'] ?? null,
+//         'role' => 'user',
+//         'oauth' => true,
+//         'password' => null,
+//         'password_set' => null
+//     ];
+//     $conn = createDbConn(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+//     if($conn) {
+//         $userDetails = userExists($conn, $userinfo['email']);
+//         if($userDetails) {
+//             $sql = "UPDATE users 
+//                     SET last_login = :last_login
+//                     WHERE id = :id";
+//             $stmt = $conn->prepare($sql);
+//             $stmt->execute(['last_login' => date("Y-m-d H:i:s"), 'id' => $userDetails['id']]);
+//             $_SESSION['user_id'] = $userDetails['id'];
+//         } else {
+//             $userinfo['joined_on'] = date("Y-m-d H:i:s");
+//             $userinfo['last_login'] = null;
+//             $createdUser  = createUser($userinfo);
+//             $_SESSION['user_id'] = $createdUser['user_id'];
+//         }
+//     }
+//     header('Location: '.$_SERVER['PHP_SELF']);
+//     die();
+// }
 
 //----------------------------USERS------------------------------//
 
@@ -203,48 +203,11 @@ function deleteUser() {
 }
 
 
-
-function authenticateUser () {
-    $email = trim(strtolower(htmlspecialchars($_POST['email'])));
-    $pw = trim(htmlspecialchars($_POST['password']));
-    $conn = createDbConn(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
-    if($conn) {
-        $sql = "SELECT id, email, password FROM users WHERE email = :email;";
-        $statement = $conn->prepare($sql);
-        $statement->execute(['email' => $email]);
-        $result = $statement->fetch();
-        if($result) {
-            //EMAIL FOUND
-            if(password_verify($pw, $result['password'])) {
-                //PW MATCHES HASH-> USER AUTHENTICATED
-                //UPDATE LOGIN TIME
-                $sql = "UPDATE users 
-                        SET last_login = :last_login
-                        WHERE email = :email";
-                $stmt = $conn->prepare($sql);
-                $stmt->execute(['last_login' => date("Y-m-d H:i:s"), 'email' => $email]);
-                $conn = null;
-                //CREATE SESSION
-                $_SESSION['user_id'] = $result['id'];
-                return ['success' => true, 'details' => 'Session Created'];
-            } else {
-                $conn = null;
-                return ['success' => false, 'details' => 'Incorrect password'];
-            }
-        } else {
-            return ['success' => false, 'details' => 'Email not found'];
-        }
-    } else {
-        $conn = null;
-        return ['success' => false, 'details' => 'Error connecting to DB'];
-    }
-}
-
-function logOutUser () {
-    unset($_SESSION['user_id']);
-    session_destroy();
-    return ['status' => 'User session destroyed'];
-}
+// function logOutUser () {
+//     unset($_SESSION['user_id']);
+//     session_destroy();
+//     return ['status' => 'User session destroyed'];
+// }
 
 
 //----------------------------LANGUAGE CONTENT..------------------------------//

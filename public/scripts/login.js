@@ -16,6 +16,9 @@ const regStatusMsg = document.querySelector('#register-form .status-msg');
 const logInStatusMsg = document.querySelector('#login-form .status-msg');
 const formCloseBtn = document.querySelectorAll('span.close');
 
+console.log(registerSubmit);
+console.log(loginSubmit);
+
 showRegisterClick.addEventListener('click', () => {
     registerFormContainer.style.display = 'block';
     registerForm.style.display = 'flex';
@@ -59,14 +62,16 @@ const handleLogin = async () => {
         } 
     }
     let request = functions.prepareRequest(
-        '../views/login.php', 
+        'http://localhost/language-app/index.php?action=login',
         null, 
-        [{'logIn': true}, data],
+        [data],
         {method: 'POST'} 
     );
+    console.log(request.url);
+    console.log(request.options);
     let res = await functions.makeRequest(request.url, request.options);
     if(res.success) {
-        window.location.href = "index.php";
+        window.location.href = "index.php?action=";
     } else {
         logInStatusMsg.textContent = res.details;
     }
@@ -123,9 +128,9 @@ const handleRegistration = async () => {
             value.textContent = '';
         }
         let request = functions.prepareRequest(
-            '../views/login.php', 
+            'index.php?action=newUser', 
             null, 
-            [{'newUser': true}, formData], 
+            [formData], 
             {method: 'POST'}
         );
         let res = await functions.makeRequest(request.url, request.options);

@@ -20,14 +20,14 @@ dropdownContent.addEventListener('mouseleave', () => {
 
 logoutBtn.addEventListener('click', async () => {
     let request = functions.prepareRequest(
-        '/language-app/public/views/login.php', 
-        null, 
-        [{'logout': true}],  
-        {method: 'POST'}
+        'http://localhost/language-app/index.php?action=logout',
+        null,
+        null,  
+        {method: 'GET'}
     );
     console.log(request);
     let res = await functions.makeRequest(request.url, request.options);
     console.log(res.json);
-    window.location.href = "/language-app/public/views/login.php";
+    window.location.href = "index.php?action=";
 })
 

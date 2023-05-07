@@ -4,7 +4,6 @@
 
 export const prepareRequest = function (url, queryParams, data, options) {
   if(options.method === 'POST') {
-    //Add data to req body
     let reqData = new FormData();
     for(let i=0; i<data.length; i++) {
         for (let property in data[i]) {
@@ -14,7 +13,6 @@ export const prepareRequest = function (url, queryParams, data, options) {
     options.body = reqData;
   } else if (options.method === 'GET') {
     url = new URL(url);
-    //Add search params to URL Obj
     if(queryParams) url.search = new URLSearchParams(queryParams).toString();
   }
     console.log(url);

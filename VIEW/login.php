@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../scripts/login.js" defer type="module"></script>
+    <script src="public/scripts/login.js" defer type="module"></script>
     <title>Login</title>
-    <link rel="stylesheet" href="../styles/index.css">
-    <link rel="stylesheet" href="../styles/login.css">
+    <link rel="stylesheet" href="public/styles/index.css">
+    <link rel="stylesheet" href="public/styles/login.css">
 </head>
 <body>
   <div class="page-container">
@@ -25,7 +25,7 @@
         <button type="button" id="login-submit" class="btn">Sign in</button>
         <?php
         echo "<a href='" . $client->createAuthUrl() . "'>
-                <img id='google-login' src='../assets/google/1x/btn_google_signin_dark_normal_web.png' alt='Sign in with google'>
+                <img id='google-login' src='public/assets/google/1x/btn_google_signin_dark_normal_web.png' alt='Sign in with google'>
               </a> ";
         ?>
         <div class="error status-msg"></div>

@@ -16,10 +16,10 @@ if(!isset($_GET['code']) && !isset($_SESSION['user_id'])) {
     die();
 }
 
-//Authorization code received from google OAuth flow, and no session exists
-if(isset($_GET['code']) && !isset($_SESSION['user_id'])) {
-    handleOAuthLogin($client);
-}
+// //Authorization code received from google OAuth flow, and no session exists
+// if(isset($_GET['code']) && !isset($_SESSION['user_id'])) {
+//     handleOAuthLogin($client);
+// }
 
 ?>
 <!DOCTYPE html>
@@ -36,17 +36,14 @@ if(isset($_GET['code']) && !isset($_SESSION['user_id'])) {
 </head>
 <body>
     <?php 
-    require_once '../includes/header.php';
-    //Pull in Language Learning Metrics for that user
-    $userDetails = readUser();
-    $userDetails = $userDetails[0];
-    $joinDate = strtotime($userDetails['joined_on']);
+        require_once '../includes/header.php'; 
+        
     ?>
     <div id="user-welcome-message">
-        <h4>Welcome <?=$userDetails['first_name']?> <?=$userDetails['last_name']?></h4>
-        <p>You joined Language Up on <?=date('l jS F Y', $joinDate);?></p>
-        <p>You've been a member for <?=intval((time() - $joinDate) / 60 / 60 / 24);?> days</p>
-        <p>You've learned <?=$userDetails['learned_words']?> words from <?=$userDetails['youtube_videos']?> YouTube videos and <?=$userDetails['news_articles']?> News Articles</p>
+        <h4>Welcome <?=$this->firstName?> <?=$this->lastName?></h4>
+        <p>You joined Language Up on <?=date('l jS F Y', $this->joinDate);?></p>
+        <p>You've been a member for <?=intval((time() - $this->joinDate) / 60 / 60 / 24);?> days</p>
+        <p>You've learned <?=$this->learnedWords?> words from <?=$this->youTubeVideos?> YouTube videos and <?=$this->newsArticles?> News Articles</p>
         <p>To review the words you've already learned, go to the <a href="">Review Content</a> section</p>
         <p>To add new words go to the <a href="">Study with YouTube</a> or <a href="">Study with News Articles</a> sections</p>
     </div>

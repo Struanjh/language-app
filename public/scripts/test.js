@@ -13,9 +13,6 @@ const getCaptions = async (e) => {
 
 mybtn.addEventListener('click', async () => {
     console.log('click');
-    // let params = {  
-    //     q: 'WfXRc3OPaLk', 
-    //   };
       let options = {
         method: 'GET',
         headers: {
